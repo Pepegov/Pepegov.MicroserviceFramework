@@ -29,8 +29,22 @@ public class ResultWrapper<T> where T : class
         Message = message;
     }
     
+    public ResultWrapper(T message, int statusCode)
+    {
+        Message = message;
+        StatusCode = statusCode;
+    }
+    
     public ResultWrapper(T message, Exception exception) : this(message)
     {
+        Message = message;
+        AddException(exception);
+    }
+    
+    public ResultWrapper(T message, int statusCode, Exception exception) : this(message)
+    {
+        Message = message;
+        StatusCode = statusCode;
         AddException(exception);
     }
 

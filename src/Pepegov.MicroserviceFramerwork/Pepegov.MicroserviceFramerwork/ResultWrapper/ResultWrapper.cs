@@ -16,6 +16,8 @@ public class ResultWrapper<T> where T : class
             return false;
         }
     }
+    
+    public int StatusCode { get; set; }
 
     public List<Exception>? Exceptions { get; private set; }
     public List<Metadata>? Metadatas { get; private set; }

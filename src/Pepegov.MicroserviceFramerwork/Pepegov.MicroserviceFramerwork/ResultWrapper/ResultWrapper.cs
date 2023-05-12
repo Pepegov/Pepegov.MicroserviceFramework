@@ -18,12 +18,16 @@ public class ResultWrapper<T> where T : class
     {
         get
         {
-            if (Exceptions is null || Exceptions.Count == 0)
+            if (Exceptions is not null && Exceptions.Count > 0)
             {
-                return true;
+                return false;
+            }
+            if (Metadatas != null && Metadatas.Any(x => x.Type == MetadataType.Error))
+            {
+                return false;
             }
 
-            return false;
+            return true;
         }
     }
     

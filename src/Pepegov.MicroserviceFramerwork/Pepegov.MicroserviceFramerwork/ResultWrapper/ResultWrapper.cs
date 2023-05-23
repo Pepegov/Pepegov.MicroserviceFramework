@@ -92,6 +92,22 @@ public class ResultWrapper<T> where T : class
         Exceptions.Add(exception);
     }
 
+    public void AddExceptions(params Exception[] exceptions)
+    {
+        if (exceptions is null)
+        {
+            return;
+        }
+        
+        if (Exceptions is null)
+        {
+            Exceptions = new List<Exception>(exceptions) { };
+            return;
+        }
+        
+        Exceptions.AddRange(exceptions);
+    }
+
     /// <summary>
     /// Add metadata to field Metadatas
     /// </summary>

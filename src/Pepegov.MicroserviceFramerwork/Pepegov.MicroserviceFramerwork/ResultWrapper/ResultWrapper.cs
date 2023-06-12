@@ -26,8 +26,7 @@ public class ResultWrapper<T> where T : class
             {
                 return false;
             }
-
-            return true;
+            return Message is not null;
         }
     }
     

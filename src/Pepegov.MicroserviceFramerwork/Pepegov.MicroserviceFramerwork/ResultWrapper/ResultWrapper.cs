@@ -61,36 +61,20 @@ public class ResultWrapper<T> where T : class
     public ResultWrapper(T message, Exception exception) : this(message)
     {
         Message = message;
-        AddException(exception);
+        AddExceptions(exception);
     }
     
     public ResultWrapper(T message, int statusCode, Exception exception) : this(message)
     {
         Message = message;
         StatusCode = statusCode;
-        AddException(exception);
+        AddExceptions(exception);
     }
     
     /// <summary>
-    /// Add exception to field Exceptions
+    /// Add exceptions to field Exceptions
     /// </summary>
-    /// <param name="exception"></param>
-    public void AddException(Exception? exception)
-    {
-        if (exception is null)
-        {
-            return;
-        }
-        
-        if (Exceptions is null)
-        {
-            Exceptions = new List<Exception>() { exception };
-            return;
-        }
-        
-        Exceptions.Add(exception);
-    }
-
+    /// <param name="exceptions"></param>
     public void AddExceptions(params Exception[] exceptions)
     {
         if (exceptions is null)

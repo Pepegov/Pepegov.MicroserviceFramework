@@ -11,6 +11,11 @@ public class Metadata
     /// Metadata type
     /// </summary>
     public MetadataType Type { get; }
+    
+    /// <summary>
+    /// Abstract metadata object
+    /// </summary>
+    public object Data { get; }
 
     /// <summary>
     /// Create metadata with type = info
@@ -30,5 +35,16 @@ public class Metadata
     public Metadata(string description, MetadataType type) : this(description)
     {
         Type = type;
-    } 
+    }
+    
+    /// <summary>
+    /// Create metadata with your type & data
+    /// </summary>
+    /// <param name="description"></param>
+    /// <param name="type"></param>
+    /// <param name="data"></param>
+    public Metadata(string description, MetadataType type, object data) : this(description, type)
+    {
+        Data = data;
+    }
 }

@@ -1,3 +1,5 @@
+using MassTransit.SagaStateMachine;
+
 namespace Pepegov.MicroserviceFramerwork.ResultWrapper;
 
 /// <summary>
@@ -38,7 +40,7 @@ public class ResultWrapper<T> where T : class
     /// <summary>
     /// Exceptions received during result creation
     /// </summary>
-    public List<Exception>? Exceptions { get; private set; }
+    public List<ExceptionData>? Exceptions { get; private set; }
     
     /// <summary>
     /// Additional response configuration data
@@ -84,11 +86,11 @@ public class ResultWrapper<T> where T : class
         
         if (Exceptions is null)
         {
-            Exceptions = new List<Exception>(exceptions) { };
+            Exceptions = new List<ExceptionData>(exceptions.ToExceptionData()) { };
             return;
         }
         
-        Exceptions.AddRange(exceptions);
+        Exceptions.AddRange(exceptions.ToExceptionData());
     }
 
     /// <summary>

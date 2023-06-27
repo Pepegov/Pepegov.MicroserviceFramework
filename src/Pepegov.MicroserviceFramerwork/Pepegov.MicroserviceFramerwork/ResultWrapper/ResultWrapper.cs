@@ -60,17 +60,30 @@ public class ResultWrapper<T> where T : class
         StatusCode = statusCode;
     }
     
-    public ResultWrapper(T message, Exception exception) : this(message)
+    public ResultWrapper(T message, params Exception[] exceptions) : this(message)
     {
         Message = message;
-        AddExceptions(exception);
+        AddExceptions(exceptions);
     }
     
-    public ResultWrapper(T message, int statusCode, Exception exception) : this(message)
+    public ResultWrapper(T message, params  ExceptionData[] exceptions) : this(message)
+    {
+        Message = message;
+        AddExceptions(exceptions);
+    }
+    
+    public ResultWrapper(T message, int statusCode, params Exception[] exceptions) : this(message)
     {
         Message = message;
         StatusCode = statusCode;
-        AddExceptions(exception);
+        AddExceptions(exceptions);
+    }
+    
+    public ResultWrapper(T message, int statusCode, params ExceptionData[] exceptions) : this(message)
+    {
+        Message = message;
+        StatusCode = statusCode;
+        AddExceptions(exceptions);
     }
     
     /// <summary>

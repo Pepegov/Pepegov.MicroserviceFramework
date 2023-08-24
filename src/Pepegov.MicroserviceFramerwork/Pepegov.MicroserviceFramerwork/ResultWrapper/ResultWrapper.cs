@@ -40,12 +40,12 @@ public class ResultWrapper<T> where T : class
     /// <summary>
     /// Exceptions received during result creation
     /// </summary>
-    public List<ExceptionData>? Exceptions { get; private set; }
+    public List<ExceptionData>? Exceptions { get; set; }
     
     /// <summary>
     /// Additional response configuration data
     /// </summary>
-    public List<Metadata>? Metadatas { get; private set; }
+    public List<Metadata>? Metadatas { get; set; }
 
     public ResultWrapper() {}
 

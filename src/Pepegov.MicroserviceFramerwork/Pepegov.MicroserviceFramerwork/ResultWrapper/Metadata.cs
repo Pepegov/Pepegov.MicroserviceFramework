@@ -17,6 +17,11 @@ public class Metadata
     /// </summary>
     public object Data { get; }
 
+    public Metadata()
+    {
+        Type = MetadataType.Info;
+    }
+    
     /// <summary>
     /// Create metadata with type = info
     /// </summary>

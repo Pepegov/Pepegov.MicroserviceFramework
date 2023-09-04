@@ -2,12 +2,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace Pepegov.MicroserviceFramework.Definition;
 
 public static class ApplicationDefinitionExtensions
 {
-    public static void AddApplicationDefinitions(this IServiceCollection services, IConfiguration configuration, params Assembly[] assemblies)
+    public static void AddApplicationDefinitions(this IServiceCollection services, IDefinitionServiceContext context, params Assembly[] assemblies)
     {
         var definitionInstances = new List<IApplicationDefinition>();
         var applicationDefinitionInformation = services
@@ -44,7 +45,7 @@ public static class ApplicationDefinitionExtensions
             .OrderByDescending(x => x.Priority);
         foreach (var definition in orderByDescending)
         {
-            definition.ConfigureServicesAsync(services, configuration);
+            definition.ConfigureServicesAsync(context);
         }
 
         //Log information about application definitions
@@ -67,8 +68,8 @@ public static class ApplicationDefinitionExtensions
         //add to di
         services.AddSingleton(applicationDefinitionInformation);
     }
-    
-    public static void UseApplicationDefinitions(this IServiceProvider serviceProvider)
+
+    public static void UseApplicationDefinitions(this IServiceProvider serviceProvider, IDefinitionApplicationContext? context = null)
     {
         var logger = serviceProvider.GetService<ILogger<ApplicationDefinition>>();
         var definitionRecords = serviceProvider.GetRequiredService<ApplicationDefinitionInformationRecords>();
@@ -83,9 +84,17 @@ public static class ApplicationDefinitionExtensions
         var orderByDescending = definitionRecords.Items 
             .Where(x => x.ApplicationDefinition.Enabled)
             .OrderByDescending(x => x.ApplicationDefinition.Priority);
+        
         foreach (var definition in orderByDescending)
         {
-            definition.ApplicationDefinition.ConfigureApplicationAsync(serviceProvider);
+            if (context is not null)
+            {
+                definition.ApplicationDefinition.ConfigureApplicationAsync(context);   
+            }
+            else
+            {
+                definition.ApplicationDefinition.ConfigureApplicationAsync(new DefinitionApplicationContext(serviceProvider));
+            }
         }
         
         if (logger is not null && logger.IsEnabled(LogLevel.Debug))

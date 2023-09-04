@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace Pepegov.MicroserviceFramework.Test.Tests;
 
@@ -26,14 +27,14 @@ public class PositiveTest
 
 public class TestDefinition : ApplicationDefinition
 {
-    public override async Task ConfigureServicesAsync(IServiceCollection services, IConfiguration configuration)
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        services.AddSingleton(new TestViewModel() { Name = "123"});
+        context.ServiceCollection.AddSingleton(new TestViewModel() { Name = "123"});
     }
 
-    public override async Task ConfigureApplicationAsync(IServiceProvider provider)
+    public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
-        var testViewModel = provider.GetService<TestViewModel>();
+        var testViewModel = context.ServiceProvider.GetService<TestViewModel>();
         ArgumentNullException.ThrowIfNull(testViewModel);
     }
 }

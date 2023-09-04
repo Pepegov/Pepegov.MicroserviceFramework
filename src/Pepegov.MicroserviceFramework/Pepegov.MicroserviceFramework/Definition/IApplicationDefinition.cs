@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace Pepegov.MicroserviceFramework.Definition
 {
@@ -10,7 +9,7 @@ namespace Pepegov.MicroserviceFramework.Definition
         
         bool Exported { get; }
 
-        Task ConfigureServicesAsync(IServiceCollection services, IConfiguration configuration);
-        Task ConfigureApplicationAsync(IServiceProvider provider);
+        Task ConfigureServicesAsync(IDefinitionServiceContext context);
+        Task ConfigureApplicationAsync(IDefinitionApplicationContext context);
     }
 }

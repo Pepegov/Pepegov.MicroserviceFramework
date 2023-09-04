@@ -1,6 +1,4 @@
-using System.Reflection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace Pepegov.MicroserviceFramework.Definition;
 
@@ -41,6 +39,6 @@ public abstract class ApplicationDefinition : IApplicationDefinition
     /// <remarks>Default values is <c>False</c></remarks>
     public virtual bool Exported => false;
 
-    public virtual async Task ConfigureServicesAsync(IServiceCollection services, IConfiguration configuration) { }
-    public virtual async Task ConfigureApplicationAsync(IServiceProvider provider) { }
+    public virtual async Task ConfigureServicesAsync(IDefinitionServiceContext context) { }
+    public virtual async Task ConfigureApplicationAsync(IDefinitionApplicationContext context) { }
 }

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepegov.MicroserviceFramework", "Pepegov.MicroserviceFramework\Pepegov.MicroserviceFramework.csproj", "{EE145918-CB4A-4F58-99AC-7F062D773801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepegov.MicroserviceFramework.ApiResults", "Pepegov.MicroserviceFramework.ApiResults\Pepegov.MicroserviceFramework.ApiResults.csproj", "{BFEBC574-6C3B-41AF-8DE9-4FFD534919D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepegov.MicroserviceFramework.AspNetCore", "Pepegov.MicroserviceFramework.AspNetCore\Pepegov.MicroserviceFramework.AspNetCore.csproj", "{AF1A4F20-101A-401E-A764-7EC864312B06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepegov.MicroserviceFramework.AspNetCore.Test", "Pepegov.MicroserviceFramework.AspNetCore.Test\Pepegov.MicroserviceFramework.AspNetCore.Test.csproj", "{4759E3F9-3739-4E79-8234-5F4213C04B03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepegov.MicroserviceFramework.Test", "Pepegov.MicroserviceFramework.Test\Pepegov.MicroserviceFramework.Test.csproj", "{290D7A21-4295-4630-9E0C-3701EA99685B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE145918-CB4A-4F58-99AC-7F062D773801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE145918-CB4A-4F58-99AC-7F062D773801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE145918-CB4A-4F58-99AC-7F062D773801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE145918-CB4A-4F58-99AC-7F062D773801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFEBC574-6C3B-41AF-8DE9-4FFD534919D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFEBC574-6C3B-41AF-8DE9-4FFD534919D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFEBC574-6C3B-41AF-8DE9-4FFD534919D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFEBC574-6C3B-41AF-8DE9-4FFD534919D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF1A4F20-101A-401E-A764-7EC864312B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF1A4F20-101A-401E-A764-7EC864312B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF1A4F20-101A-401E-A764-7EC864312B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF1A4F20-101A-401E-A764-7EC864312B06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4759E3F9-3739-4E79-8234-5F4213C04B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4759E3F9-3739-4E79-8234-5F4213C04B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4759E3F9-3739-4E79-8234-5F4213C04B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4759E3F9-3739-4E79-8234-5F4213C04B03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290D7A21-4295-4630-9E0C-3701EA99685B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290D7A21-4295-4630-9E0C-3701EA99685B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290D7A21-4295-4630-9E0C-3701EA99685B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290D7A21-4295-4630-9E0C-3701EA99685B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

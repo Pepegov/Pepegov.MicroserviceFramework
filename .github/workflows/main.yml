@@ -1,4 +1,3 @@
-
 name: .NET Core
 
 on:
@@ -17,11 +16,21 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Install dependencies
-      run: dotnet restore src/Pepegov.MicroserviceFramerwork/Pepegov.MicroserviceFramerwork.sln
+      run: dotnet restore src/Pepegov.MicroserviceFramework/Pepegov.MicroserviceFramework.sln
     - name: Build
-      run: dotnet build src/Pepegov.MicroserviceFramerwork/Pepegov.MicroserviceFramerwork.sln --configuration Release --no-restore 
-    - name: Publish Pepegov.MicroserviceFramerwork
+      run: dotnet build src/Pepegov.MicroserviceFramework/Pepegov.MicroserviceFramework.sln --configuration Release --no-restore 
+    - name: Publish Pepegov.MicroserviceFramework
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/Pepegov.MicroserviceFramerwork/Pepegov.MicroserviceFramerwork/Pepegov.MicroserviceFramerwork.csproj
+          PROJECT_FILE_PATH: src/Pepegov.MicroserviceFramework/Pepegov.MicroserviceFramework/Pepegov.MicroserviceFramework.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}} 
+    - name: Publish Pepegov.MicroserviceFramework.ApiResults
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/Pepegov.MicroserviceFramework/Pepegov.MicroserviceFramework.ApiResults/Pepegov.MicroserviceFramework.ApiResults.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Publish Pepegov.MicroserviceFramework.AspNetCore
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/Pepegov.MicroserviceFramework/Pepegov.MicroserviceFramework.AspNetCore/Pepegov.MicroserviceFramework.AspNetCore.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}

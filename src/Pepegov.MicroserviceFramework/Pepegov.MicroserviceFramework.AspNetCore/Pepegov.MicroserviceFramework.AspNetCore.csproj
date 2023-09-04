@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Version>2.0.0</Version>
+        <Title>Pepegov.MicroserviceFramework.AspNetCode</Title>
+        <Authors>Pepegov</Authors>
+        <Copyright>Pepegov</Copyright>
+        <PackageProjectUrl>https://github.com/Pepegov/Pepegov.MicroserviceFramework</PackageProjectUrl>
+        <PackageLicenseUrl>https://www.gnu.org/licenses/gpl-3.0.en.html</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/Pepegov/Pepegov.MicroserviceFramework</RepositoryUrl>
+        <Nullable>enable</Nullable>
+        <PackageIcon>icon.png</PackageIcon>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Pepegov.MicroserviceFramework.ApiResults\Pepegov.MicroserviceFramework.ApiResults.csproj" />
+      <ProjectReference Include="..\Pepegov.MicroserviceFramework\Pepegov.MicroserviceFramework.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Update="icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>

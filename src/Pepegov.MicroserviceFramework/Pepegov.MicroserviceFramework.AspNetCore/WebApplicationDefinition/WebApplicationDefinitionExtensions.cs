@@ -6,14 +6,14 @@ namespace Pepegov.MicroserviceFramework.AspNetCore.WebApplicationDefinition;
 
 public static class WebApplicationDefinitionExtensions
 {
-    public static void AddDefinitions(this WebApplicationBuilder builder,
+    public static async Task AddApplicationDefinitions(this WebApplicationBuilder builder,
         params Assembly[] assemblies)
     {
-        builder.Services.AddApplicationDefinitions(new WebDefinitionServiceContext(builder), assemblies);
+       await builder.Services.AddApplicationDefinitions(new WebDefinitionServiceContext(builder), assemblies);
     }
 
-    public static void UseDefinitions(this WebApplication application)
+    public static async Task UseApplicationDefinitions(this WebApplication application)
     {
-        application.Services.UseApplicationDefinitions(new WebDefinitionApplicationContext(application));
+        await application.Services.UseApplicationDefinitions(new WebDefinitionApplicationContext(application));
     }
 }

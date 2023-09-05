@@ -8,7 +8,7 @@ namespace Pepegov.MicroserviceFramework.Definition;
 
 public static class ApplicationDefinitionExtensions
 {
-    public static void AddApplicationDefinitions(this IServiceCollection services, IDefinitionServiceContext context, params Assembly[] assemblies)
+    public static async Task AddApplicationDefinitions(this IServiceCollection services, IDefinitionServiceContext context, params Assembly[] assemblies)
     {
         var definitionInstances = new List<IApplicationDefinition>();
         var applicationDefinitionInformation = services
@@ -45,7 +45,7 @@ public static class ApplicationDefinitionExtensions
             .OrderByDescending(x => x.Priority);
         foreach (var definition in orderByDescending)
         {
-            definition.ConfigureServicesAsync(context);
+            await definition.ConfigureServicesAsync(context);
         }
 
         //Log information about application definitions
@@ -64,12 +64,12 @@ public static class ApplicationDefinitionExtensions
                 }
             }
         }
-
+        
         //add to di
         services.AddSingleton(applicationDefinitionInformation);
     }
 
-    public static void UseApplicationDefinitions(this IServiceProvider serviceProvider, IDefinitionApplicationContext? context = null)
+    public static async Task UseApplicationDefinitions(this IServiceProvider serviceProvider, IDefinitionApplicationContext? context = null)
     {
         var logger = serviceProvider.GetService<ILogger<ApplicationDefinition>>();
         var definitionRecords = serviceProvider.GetRequiredService<ApplicationDefinitionInformationRecords>();
@@ -89,11 +89,11 @@ public static class ApplicationDefinitionExtensions
         {
             if (context is not null)
             {
-                definition.ApplicationDefinition.ConfigureApplicationAsync(context);   
+                await definition.ApplicationDefinition.ConfigureApplicationAsync(context);   
             }
             else
             {
-                definition.ApplicationDefinition.ConfigureApplicationAsync(new DefinitionApplicationContext(serviceProvider));
+                await definition.ApplicationDefinition.ConfigureApplicationAsync(new DefinitionApplicationContext(serviceProvider));
             }
         }
         

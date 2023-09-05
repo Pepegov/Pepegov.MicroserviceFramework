@@ -1,10 +1,7 @@
 using System.Net;
 using System.Net.Mime;
-using System.Text;
 using System.Text.Json;
-using System.Xml.Serialization;
 using Microsoft.AspNetCore.Http;
-using Pepegov.MicroserviceFramework.AspNetCore.Infrastructure;
 using Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 
 namespace Pepegov.MicroserviceFramework.AspNetCore.Test.Tests.HttpResultTests;

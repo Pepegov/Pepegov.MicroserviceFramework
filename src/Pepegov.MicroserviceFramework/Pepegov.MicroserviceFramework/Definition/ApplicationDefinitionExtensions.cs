@@ -8,6 +8,62 @@ namespace Pepegov.MicroserviceFramework.Definition;
 
 public static class ApplicationDefinitionExtensions
 {
+    public static void AddApplicationDefinitionsModules(this IServiceCollection services, string contentRootPath, string modulesFolderPath, IDefinitionServiceContext context)
+    { //TODO: test this method
+        var modulesFolder = Path.Combine(contentRootPath, modulesFolderPath);
+
+        if (!Directory.Exists(modulesFolder))
+        {
+            throw new DirectoryNotFoundException(modulesFolder);
+        }
+
+        var instances = new List<IApplicationDefinition>();
+        
+        var modulesDirectory = new DirectoryInfo(modulesFolderPath);
+        var modules = modulesDirectory.GetFiles("*.dll");
+        if (!modules.Any())
+        {
+            return;
+        }
+
+        foreach (var fileInfo in modules)
+        {
+            var module = Assembly.LoadFile(fileInfo.FullName);
+            var typesAll = module.GetExportedTypes();
+            var typesDefinition = typesAll
+                .Where(type =>
+                    type is { IsAbstract: false, IsInterface: false } &&
+                    typeof(ApplicationDefinition).IsAssignableFrom(type));
+
+            var moduleInstances = typesDefinition.Select(Activator.CreateInstance)
+                .Cast<IApplicationDefinition>()
+                .Where(x => x.Enabled && x.Exported)
+                .ToList();
+
+            instances.AddRange(moduleInstances);
+        }
+        
+        if (instances.Any())
+        {
+            var applicationDefinitionInformation = services
+                                                       .Where(x => x.ServiceType == typeof(ApplicationDefinitionInformationRecords))
+                                                       .Select(x => x.ImplementationInstance)
+                                                       .Cast<ApplicationDefinitionInformationRecords>()
+                                                       .FirstOrDefault()
+                                                   ?? new ApplicationDefinitionInformationRecords();
+
+            foreach (var definition in instances)
+            {
+                applicationDefinitionInformation.AddApplicationDefinitionInformation(
+                    new ApplicationDefinitionInformation(definition, definition.GetType().Assembly, definition.Enabled, definition.Exported));
+            }
+            
+            //add to di
+            services.AddSingleton(applicationDefinitionInformation);
+        }
+    }
+
+    
     public static async Task AddApplicationDefinitions(this IServiceCollection services, IDefinitionServiceContext context, params Assembly[] assemblies)
     {
         var definitionInstances = new List<IApplicationDefinition>();

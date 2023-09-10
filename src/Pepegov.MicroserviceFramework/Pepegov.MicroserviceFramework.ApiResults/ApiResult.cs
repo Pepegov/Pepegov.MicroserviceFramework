@@ -15,6 +15,25 @@ public class ApiResult
     public int StatusCode { get; set; }
     
     /// <summary>
+    /// Check for exceptions
+    /// </summary>
+    public virtual bool IsSuccessful
+    {
+        get
+        {
+            if (Exceptions is not null && Exceptions.Count > 0)
+            {
+                return false;
+            }
+            if (Metadata is not null && Metadata.Any(x => x.Type == MetadataType.Error))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+    
+    /// <summary>
     /// Exceptions received during result creation
     /// </summary>
     public List<ExceptionData>? Exceptions { get; set; }

@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
+using Pepegov.MicroserviceFramework.ApiResults;
 using Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 
 namespace Pepegov.MicroserviceFramework.AspNetCore.Test.Tests.HttpResultTests;
@@ -48,5 +49,18 @@ public class CustomHttpResultTests
 
         Assert.That(expectedResult == body);
     }
-    //TODO: тест на 0 в statuscode
+
+    [Test]
+    public async Task NegativeStatusCodeTest()
+    {
+        const int statusCode = 0;
+        IResult httpResult = new HttpResult<TestViewModel>(new ApiResult<TestViewModel>(_model, statusCode));
+        HttpContext context = new DefaultHttpContext();
+        context.Response.Body = new MemoryStream();
+        context.Request.ContentType = MediaTypeNames.Application.Xml;
+
+        await httpResult.ExecuteAsync(context);
+        
+        Assert.That(context.Response.StatusCode == (int)HttpStatusCode.Continue);
+    }
 }

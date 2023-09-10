@@ -15,7 +15,7 @@ public class ApiResult<TMessage> : ApiResult
     /// <summary>
     /// Check for exceptions
     /// </summary>
-    public bool IsSuccessful
+    public override bool IsSuccessful
     {
         get
         {
@@ -23,7 +23,7 @@ public class ApiResult<TMessage> : ApiResult
             {
                 return false;
             }
-            if (Metadata != null && Metadata.Any(x => x.Type == MetadataType.Error))
+            if (Metadata is not null && Metadata.Any(x => x.Type == MetadataType.Error))
             {
                 return false;
             }

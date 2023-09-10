@@ -33,7 +33,7 @@ public abstract class BaseHttpResult<T> : IHttpResult
         
         httpContext.Response.ContentType = httpContext.Request.ContentType;
         httpContext.Response.StatusCode = (int)StatusCode;
-        if (httpContext.Response.StatusCode == 0)
+        if (httpContext.Response.StatusCode <= 0)
         {
             httpContext.Response.StatusCode = (int)HttpStatusCode.Continue;
         }

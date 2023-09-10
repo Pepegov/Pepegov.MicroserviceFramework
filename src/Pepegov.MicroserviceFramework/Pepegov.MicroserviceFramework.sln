@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepegov.MicroserviceFramewo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepegov.MicroserviceFramework.Test", "Pepegov.MicroserviceFramework.Test\Pepegov.MicroserviceFramework.Test.csproj", "{290D7A21-4295-4630-9E0C-3701EA99685B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepegov.MicroserviceFramework.ApiResults.Test", "Pepegov.MicroserviceFramework.ApiResults.Test\Pepegov.MicroserviceFramework.ApiResults.Test.csproj", "{711AC4E0-64D9-45E6-9C0F-8B9B3EA82ED0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9B08FBAF-F4E8-4542-AF49-6A72860A5A12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,14 @@ Global
 		{290D7A21-4295-4630-9E0C-3701EA99685B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{290D7A21-4295-4630-9E0C-3701EA99685B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{290D7A21-4295-4630-9E0C-3701EA99685B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{711AC4E0-64D9-45E6-9C0F-8B9B3EA82ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{711AC4E0-64D9-45E6-9C0F-8B9B3EA82ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{711AC4E0-64D9-45E6-9C0F-8B9B3EA82ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{711AC4E0-64D9-45E6-9C0F-8B9B3EA82ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{290D7A21-4295-4630-9E0C-3701EA99685B} = {9B08FBAF-F4E8-4542-AF49-6A72860A5A12}
+		{711AC4E0-64D9-45E6-9C0F-8B9B3EA82ED0} = {9B08FBAF-F4E8-4542-AF49-6A72860A5A12}
+		{4759E3F9-3739-4E79-8234-5F4213C04B03} = {9B08FBAF-F4E8-4542-AF49-6A72860A5A12}
 	EndGlobalSection
 EndGlobal

@@ -5,14 +5,14 @@ using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace Pepegov.MicroserviceFramework.Test.Tests;
 
-public class PositiveTest
+public class PositiveApplicationDefinitionTest
 {
     private IServiceProvider _serviceProvider;
     
     [SetUp]
     public void Setup()
     {
-        var assembly = typeof(PositiveTest).Assembly;
+        var assembly = typeof(PositiveApplicationDefinitionTest).Assembly;
         IServiceCollection serviceCollection = new ServiceCollection();
         serviceCollection.AddApplicationDefinitions(null ,assembly);
         _serviceProvider = serviceCollection.BuildServiceProvider();
@@ -21,7 +21,7 @@ public class PositiveTest
     [Test]
     public void Test()
     {
-        Assert.DoesNotThrow(() => _serviceProvider.UseApplicationDefinitions());
+        Assert.DoesNotThrowAsync(() => _serviceProvider.UseApplicationDefinitions());
     }
 }
 

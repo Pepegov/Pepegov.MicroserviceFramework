@@ -5,17 +5,17 @@ public class Metadata
     /// <summary>
     /// Metadata description
     /// </summary>
-    public string Description { get; }
+    public string Description { get; set; }
 
     /// <summary>
     /// Metadata type
     /// </summary>
-    public MetadataType Type { get; }
+    public MetadataType Type { get; set; }
     
     /// <summary>
     /// Abstract metadata object
     /// </summary>
-    public object Data { get; }
+    public object Data { get; set; }
 
     /// <summary>
     /// Create metadata with type = info with empty description

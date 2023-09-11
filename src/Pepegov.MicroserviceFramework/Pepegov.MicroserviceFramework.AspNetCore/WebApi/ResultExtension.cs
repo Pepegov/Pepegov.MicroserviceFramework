@@ -13,7 +13,7 @@ public static class ResultExtension
         => new HttpResult<TMessage>(message, statusCode);
     
     public static IResult Custom(this IResultExtensions resultExtensions, ApiResult message)
-        => new HttpXmlResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
+        => new HttpResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
     
     public static IResult Custom<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message)
         => new HttpResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode);

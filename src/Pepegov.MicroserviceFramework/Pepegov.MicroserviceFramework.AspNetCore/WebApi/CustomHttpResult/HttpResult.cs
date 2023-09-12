@@ -23,9 +23,16 @@ public class HttpResult<T> : IResult
 
     public async Task ExecuteAsync(HttpContext httpContext)
     {
-        var contextTypeValue = HttpContextHelper.ParseContextType(httpContext);
-        
-        ArgumentNullException.ThrowIfNull(contextTypeValue);
+        ContextTypeValue contextTypeValue;
+        if (httpContext.Request.ContentType is null)
+        {
+            contextTypeValue = ContextTypeValue.Standart;
+        }
+        else
+        {
+            contextTypeValue = HttpContextHelper.ParseContextType(httpContext);
+        }
+
         if (!HttpResultParser.TryParse(contextTypeValue.Type, out var httpResultType))
         {
             throw new KeyNotFoundException($"Not found {nameof(IHttpResult)} instance by type = {contextTypeValue.Type}");

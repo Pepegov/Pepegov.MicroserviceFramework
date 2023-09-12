@@ -27,6 +27,7 @@ public class HttpResult<T> : IResult
         if (httpContext.Request.ContentType is null)
         {
             contextTypeValue = ContextTypeValue.Standart;
+            httpContext.Request.ContentType = contextTypeValue.Type;
         }
         else
         {

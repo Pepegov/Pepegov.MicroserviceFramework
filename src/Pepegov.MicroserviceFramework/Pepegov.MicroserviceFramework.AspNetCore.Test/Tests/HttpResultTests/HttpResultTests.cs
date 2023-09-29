@@ -6,7 +6,7 @@ using Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 
 namespace Pepegov.MicroserviceFramework.AspNetCore.Test.Tests.HttpResultTests;
 
-public class HtppResultTests
+public class HttpResultTests
 {
     private TestViewModel _model;
     

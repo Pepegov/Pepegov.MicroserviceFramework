@@ -14,7 +14,7 @@ public class PositiveApplicationDefinitionTest
     {
         var assembly = typeof(PositiveApplicationDefinitionTest).Assembly;
         IServiceCollection serviceCollection = new ServiceCollection();
-        serviceCollection.AddApplicationDefinitions(null ,assembly);
+        serviceCollection.AddApplicationDefinitions(new DefinitionServiceContext(serviceCollection, null) ,assembly);
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }
 
@@ -36,5 +36,6 @@ public class TestDefinition : ApplicationDefinition
     {
         var testViewModel = context.ServiceProvider.GetService<TestViewModel>();
         ArgumentNullException.ThrowIfNull(testViewModel);
+        await base.ConfigureApplicationAsync(context);
     }
 }

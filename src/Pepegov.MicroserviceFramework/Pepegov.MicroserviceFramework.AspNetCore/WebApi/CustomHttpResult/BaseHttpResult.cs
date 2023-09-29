@@ -36,6 +36,7 @@ public abstract class BaseHttpResult<T> : IHttpResult
         if (httpContext.Response.StatusCode <= 0)
         {
             httpContext.Response.StatusCode = (int)HttpStatusCode.Continue;
+            return;
         }
 
         if (message is null)

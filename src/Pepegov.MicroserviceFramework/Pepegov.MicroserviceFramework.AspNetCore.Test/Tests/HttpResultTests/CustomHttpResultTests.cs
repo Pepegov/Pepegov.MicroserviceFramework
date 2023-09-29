@@ -60,7 +60,11 @@ public class CustomHttpResultTests
         context.Request.ContentType = MediaTypeNames.Application.Xml;
 
         await httpResult.ExecuteAsync(context);
-        
+
+        context.Response.Body.Position = 0;
+
         Assert.That(context.Response.StatusCode == (int)HttpStatusCode.Continue);
+        Assert.That(context.Response.ContentLength == null);
+        Assert.That((new StreamReader(context.Response.Body).ReadToEndAsync().Result == string.Empty));
     }
 }

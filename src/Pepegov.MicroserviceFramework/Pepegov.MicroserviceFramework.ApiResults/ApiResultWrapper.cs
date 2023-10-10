@@ -78,6 +78,11 @@ public class ApiResult<TMessage> : ApiResult
         Message = message;
     }
     
+    public ApiResult(HttpStatusCode statusCode, params ExceptionData[] exceptions) : base(statusCode, exceptions) { }
+    public ApiResult(int statusCode, params ExceptionData[] exceptions) : base(statusCode, exceptions) { }
+    public ApiResult(int statusCode, params Exception[] exceptions) : base(statusCode, exceptions) { }
+    public ApiResult(HttpStatusCode statusCode, params Exception[] exceptions) : base(statusCode, exceptions) { }
+    
     /// <summary>
     /// Convert result to another entity type
     /// </summary>

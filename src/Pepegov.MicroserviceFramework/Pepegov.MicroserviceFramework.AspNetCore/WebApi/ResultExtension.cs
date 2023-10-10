@@ -42,7 +42,7 @@ public static class ResultExtension
         => new HttpJsonResult<TMessage>(message, statusCode);
     
     public static IResult CustomAsJson(this IResultExtensions resultExtensions, ApiResult message)
-        => new HttpXmlResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
+        => new HttpJsonResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
 
     
     public static IResult CustomAsJson<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message, HttpStatusCode statusCode)

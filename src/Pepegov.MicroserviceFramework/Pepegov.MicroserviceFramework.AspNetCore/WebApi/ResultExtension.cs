@@ -23,13 +23,13 @@ public static class ResultExtension
     #region TextPlan
     
     public static IResult CustomAsTextPlan(this IResultExtensions resultExtensions, string message, HttpStatusCode statusCode)
-        =>  new HttpTextPlanResult<string>(message, statusCode);
+        =>  new HttpTextPlanResult<string>(message, statusCode); 
     
     public static IResult CustomAsTextPlan<TMessage>(this IResultExtensions resultExtensions, TMessage message, HttpStatusCode statusCode)
         =>  new HttpTextPlanResult<TMessage>(message, statusCode);
 
     public static IResult CustomAsTextPlan(this IResultExtensions resultExtensions, ApiResult message)
-        => new HttpXmlResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
+        => new HttpTextPlanResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
     
     public static IResult CustomAsTextPlan<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message)
         =>  new HttpTextPlanResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode);

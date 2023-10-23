@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Pepegov.MicroserviceFramework.Definition.Context;
@@ -61,8 +62,10 @@ public static class ApplicationDefinitionExtensions
             services.AddSingleton(applicationDefinitionInformation);
         }
     }
-
     
+    public static Task AddApplicationDefinitions(this IServiceCollection services, IConfiguration configuration, params Assembly[] assemblies)
+        => AddApplicationDefinitions(services, new DefinitionServiceContext(services, configuration), assemblies);
+
     public static async Task AddApplicationDefinitions(this IServiceCollection services, IDefinitionServiceContext context, params Assembly[] assemblies)
     {
         var definitionInstances = new List<IApplicationDefinition>();
@@ -124,7 +127,10 @@ public static class ApplicationDefinitionExtensions
         services.AddSingleton(applicationDefinitionInformation);
     }
 
-    public static async Task UseApplicationDefinitions(this IServiceProvider serviceProvider, IDefinitionApplicationContext? context = null)
+    public static Task UseApplicationDefinitions(this IServiceProvider serviceProvider)
+        => UseApplicationDefinitions(serviceProvider, new DefinitionApplicationContext(serviceProvider));
+    
+    public static async Task UseApplicationDefinitions(this IServiceProvider serviceProvider, IDefinitionApplicationContext context)
     {
         var logger = serviceProvider.GetService<ILogger<ApplicationDefinition>>();
         var definitionRecords = serviceProvider.GetRequiredService<ApplicationDefinitionInformationRecords>();

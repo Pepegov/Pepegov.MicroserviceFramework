@@ -9,6 +9,11 @@ namespace Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 [HttpContextType($"{MediaTypeNames.Application.Json}")]
 public sealed class HttpJsonResult<T> : BaseHttpResult<T>
 {
+    private static readonly JsonSerializerOptions _jsonSerializerSettings = new ()
+	{
+		PropertyNamingPolicy  = JsonNamingPolicy.CamelCase,
+	};
+
     public HttpJsonResult(T obj, HttpStatusCode statusCode) : base(obj, statusCode) { } 
 
     public override string? GetResponseMessage()
@@ -18,7 +23,7 @@ public sealed class HttpJsonResult<T> : BaseHttpResult<T>
         {
             return null;
         }
-        return JsonSerializer.Serialize(message);
+        return JsonSerializer.Serialize(message, _jsonSerializerSettings);
     }
 }
 

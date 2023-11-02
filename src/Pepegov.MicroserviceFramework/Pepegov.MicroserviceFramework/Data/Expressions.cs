@@ -14,6 +14,10 @@ public static class Expressions
 
     public static class Paths
     {
+        /// <summary>
+        /// Appropriate values:
+        /// .\ ..\ \ ..\a .\a \a \a\a \a\a.a U: U:\ U:\\ U:\\\ U:\a U:\\a U:\a.a U:\\a.a U:\a\a U:\\a\a 
+        /// </summary>
         public static readonly Regex Windows = new Regex(
             @"(^([a-z]|[A-Z]):(?=\\(?![\0-\37<>:"+"\""
                  +@"/\\|?*])|\/(?![\0-\37<>:"+"\""+@"/\\|?*])|$)|^\\(?=[\\\/][^\0-\37<>:"+"\""

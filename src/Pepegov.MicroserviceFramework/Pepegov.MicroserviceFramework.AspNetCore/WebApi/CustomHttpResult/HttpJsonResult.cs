@@ -1,15 +1,18 @@
 using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
-using Microsoft.AspNetCore.Http;
-using Pepegov.MicroserviceFramework.ApiResults;
 
 namespace Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 
 [HttpContextType($"{MediaTypeNames.Application.Json}")]
 public sealed class HttpJsonResult<T> : BaseHttpResult<T>
 {
-    public HttpJsonResult(T obj, HttpStatusCode statusCode) : base(obj, statusCode) { } 
+    public HttpJsonResult(T obj, HttpStatusCode statusCode) : base(obj, statusCode) { }
+
+    private static readonly JsonSerializerOptions _jsonSerializerSettings = new()
+    {
+        PropertyNamingPolicy  = JsonNamingPolicy.CamelCase,
+    };
 
     public override string? GetResponseMessage()
     {
@@ -18,7 +21,7 @@ public sealed class HttpJsonResult<T> : BaseHttpResult<T>
         {
             return null;
         }
-        return JsonSerializer.Serialize(message);
+        return JsonSerializer.Serialize(message,  _jsonSerializerSettings);
     }
 }
 

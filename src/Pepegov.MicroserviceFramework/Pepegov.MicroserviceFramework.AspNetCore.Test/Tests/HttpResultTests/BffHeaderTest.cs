@@ -14,6 +14,10 @@ public class BffHeaderTest
 {
     private ApiResult<TestViewModel> _model;
     private HttpContext _context;
+    private readonly JsonSerializerOptions _jsonSerializerSettings = new()
+    {
+        PropertyNamingPolicy  = JsonNamingPolicy.CamelCase,
+    };
     
     [OneTimeSetUp]
     public void OneTimeSetup()
@@ -38,7 +42,7 @@ public class BffHeaderTest
 
         await httpResult.ExecuteAsync(_context);
 
-        var expectedResult = JsonSerializer.Serialize(_model.Message);
+        var expectedResult = JsonSerializer.Serialize(_model.Message, _jsonSerializerSettings);
         _context.Response.Body.Seek(0, SeekOrigin.Begin);
         string body = await new StreamReader(_context.Response.Body).ReadToEndAsync();
 
@@ -97,7 +101,7 @@ public class BffHeaderTest
 
         await httpResult.ExecuteAsync(_context);
 
-        var expectedResult = JsonSerializer.Serialize(model.Exceptions?.ToMinimalExceptionData());
+        var expectedResult = JsonSerializer.Serialize(model.Exceptions?.ToMinimalExceptionData(), _jsonSerializerSettings);
         _context.Response.Body.Seek(0, SeekOrigin.Begin);
         string body = await new StreamReader(_context.Response.Body).ReadToEndAsync();
         

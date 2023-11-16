@@ -42,7 +42,7 @@ public class HttpResult<T> : IResult
         Type constructedType = httpResultType.MakeGenericType(typeof(T));
         var httpResultInstance = (IHttpResult)Activator.CreateInstance(constructedType, new object[] { _obj, _statusCode });
         ArgumentNullException.ThrowIfNull(httpResultInstance);
-
+        
         await httpResultInstance.ExecuteAsync(httpContext);
     }
 }

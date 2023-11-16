@@ -10,6 +10,10 @@ namespace Pepegov.MicroserviceFramework.AspNetCore.Test.Tests.HttpResultTests;
 public class CustomHttpResultTests
 {
     private TestViewModel _model;
+    private readonly JsonSerializerOptions _jsonSerializerSettings = new()
+    {
+        PropertyNamingPolicy  = JsonNamingPolicy.CamelCase,
+    };
     
     [OneTimeSetUp]
     public void OneTimeSetup()
@@ -28,7 +32,7 @@ public class CustomHttpResultTests
         await httpResult.ExecuteAsync(context);
         
         context.Response.Body.Seek(0, SeekOrigin.Begin);
-        var expectedResult = JsonSerializer.Serialize(_model);
+        var expectedResult = JsonSerializer.Serialize(_model, _jsonSerializerSettings);
         string body = await new StreamReader(context.Response.Body).ReadToEndAsync();
 
         Assert.That(expectedResult == body);

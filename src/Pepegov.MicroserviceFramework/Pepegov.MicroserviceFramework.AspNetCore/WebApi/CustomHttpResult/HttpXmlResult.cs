@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Mime;
+using System.Text;
 using System.Xml.Serialization;
 using Pepegov.MicroserviceFramework.ApiResults;
 using Pepegov.MicroserviceFramework.AspNetCore.Infrastructure;
@@ -10,6 +11,18 @@ namespace Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 public sealed class HttpXmlResult<T> : BaseHttpResult<T>
 { 
     public HttpXmlResult(T obj, HttpStatusCode statusCode) : base(obj, statusCode) { }
+    
+    public HttpXmlResult(T obj, HttpStatusCode statusCode, bool isDefaultContext = false) : base(obj, statusCode)
+    {
+        if (isDefaultContext)
+        {
+            base.ContextTypeValue = new()
+            {
+                Type = MediaTypeNames.Application.Json,
+                Encoding = Encoding.UTF8,
+            };
+        }
+    }
 
     public override string? GetResponseMessage()
     {

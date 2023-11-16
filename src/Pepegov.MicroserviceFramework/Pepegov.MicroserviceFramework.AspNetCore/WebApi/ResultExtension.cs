@@ -23,43 +23,43 @@ public static class ResultExtension
     #region TextPlan
     
     public static IResult CustomAsTextPlan(this IResultExtensions resultExtensions, string message, HttpStatusCode statusCode)
-        =>  new HttpTextPlanResult<string>(message, statusCode); 
+        =>  new HttpTextPlanResult<string>(message, statusCode, true); 
     
     public static IResult CustomAsTextPlan<TMessage>(this IResultExtensions resultExtensions, TMessage message, HttpStatusCode statusCode)
-        =>  new HttpTextPlanResult<TMessage>(message, statusCode);
+        =>  new HttpTextPlanResult<TMessage>(message, statusCode, true);
 
     public static IResult CustomAsTextPlan(this IResultExtensions resultExtensions, ApiResult message)
-        => new HttpTextPlanResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
+        => new HttpTextPlanResult<ApiResult>(message, (HttpStatusCode)message.StatusCode, true);
     
     public static IResult CustomAsTextPlan<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message)
-        =>  new HttpTextPlanResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode);
+        =>  new HttpTextPlanResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode, true);
 
     #endregion
 
     #region Json
     
     public static IResult CustomAsJson<TMessage>(this IResultExtensions resultExtensions, TMessage message, HttpStatusCode statusCode)
-        => new HttpJsonResult<TMessage>(message, statusCode);
+        => new HttpJsonResult<TMessage>(message, statusCode, true);
     
     public static IResult CustomAsJson(this IResultExtensions resultExtensions, ApiResult message)
-        => new HttpJsonResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
+        => new HttpJsonResult<ApiResult>(message, (HttpStatusCode)message.StatusCode, true);
 
     
     public static IResult CustomAsJson<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message, HttpStatusCode statusCode)
-        => new HttpJsonResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode);
+        => new HttpJsonResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode, true);
     
     #endregion
 
     #region Xml
     
     public static IResult CustomAsXml<TMessage>(this IResultExtensions resultExtensions, TMessage message, HttpStatusCode statusCode)
-        => new HttpXmlResult<TMessage>(message, statusCode);
+        => new HttpXmlResult<TMessage>(message, statusCode, true);
 
     public static IResult CustomAsXml(this IResultExtensions resultExtensions, ApiResult message)
-        => new HttpXmlResult<ApiResult>(message, (HttpStatusCode)message.StatusCode);
+        => new HttpXmlResult<ApiResult>(message, (HttpStatusCode)message.StatusCode, true);
     
     public static IResult CustomAsXml<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message)
-        => new HttpXmlResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode);
+        => new HttpXmlResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode, true);
     
     #endregion
     

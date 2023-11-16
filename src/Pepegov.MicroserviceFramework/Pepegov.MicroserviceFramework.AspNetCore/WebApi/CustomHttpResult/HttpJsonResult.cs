@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Mime;
+using System.Text;
 using System.Text.Json;
 
 namespace Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
@@ -8,6 +9,18 @@ namespace Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 public sealed class HttpJsonResult<T> : BaseHttpResult<T>
 {
     public HttpJsonResult(T obj, HttpStatusCode statusCode) : base(obj, statusCode) { }
+    
+    public HttpJsonResult(T obj, HttpStatusCode statusCode, bool isDefaultContext = false) : base(obj, statusCode)
+    {
+        if (isDefaultContext)
+        {
+            base.ContextTypeValue = new()
+            {
+                Type = MediaTypeNames.Application.Json,
+                Encoding = Encoding.UTF8,
+            };
+        }
+    }
 
     private static readonly JsonSerializerOptions _jsonSerializerSettings = new()
     {

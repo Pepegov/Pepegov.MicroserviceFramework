@@ -21,7 +21,11 @@ public abstract class BaseHttpResult<T> : IHttpResult
     
     public virtual async Task ExecuteAsync(HttpContext httpContext)
     {
-        ContextTypeValue = HttpContextHelper.ParseContextType(httpContext);
+        if (ContextTypeValue is null)
+        {
+            ContextTypeValue = HttpContextHelper.ParseContextType(httpContext);
+        }
+        
         //parse bff header is it exits
         var bffHeader = httpContext.Request.Headers["Bff"].FirstOrDefault();
         if (bffHeader is not null && bffHeader.ToLower().StartsWith("true"))
@@ -48,9 +52,6 @@ public abstract class BaseHttpResult<T> : IHttpResult
     }
 
     protected object? GetMessage()
-        => GetMessage(_bff);
-
-    private object? GetMessage(bool bff)
     {
         if (_bff && _message is ApiResult apiResult)
         {
@@ -97,7 +98,6 @@ public abstract class BaseHttpResult<T> : IHttpResult
             }};
         }
     }
-
     protected PropertyInfo? TryGetMessageProperty()
     {
         var entityType = typeof(T);

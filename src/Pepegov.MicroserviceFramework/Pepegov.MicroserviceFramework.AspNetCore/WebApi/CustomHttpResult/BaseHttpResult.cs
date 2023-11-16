@@ -35,7 +35,7 @@ public abstract class BaseHttpResult<T> : IHttpResult
 
         var message = GetResponseMessage();
         
-        httpContext.Response.ContentType = httpContext.Request.ContentType;
+        httpContext.Response.ContentType = ContextTypeValue.Type;
         httpContext.Response.StatusCode = (int)StatusCode;
         if (httpContext.Response.StatusCode <= 0)
         {

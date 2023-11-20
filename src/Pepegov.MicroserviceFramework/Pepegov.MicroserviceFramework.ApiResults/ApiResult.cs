@@ -145,7 +145,7 @@ public class ApiResult
         var errorMessage = new StringBuilder();
         foreach (var exception in Exceptions)
         {
-            errorMessage.Append($"{errorMessage.ToString()} \n");
+            errorMessage.Append($"Type:{exception.TypeData}. Data:{exception.Message} \n");
         }
 
         return errorMessage.ToString();

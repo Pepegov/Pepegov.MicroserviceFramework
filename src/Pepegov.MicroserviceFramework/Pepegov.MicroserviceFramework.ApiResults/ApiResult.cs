@@ -76,6 +76,16 @@ public class ApiResult
         AddExceptions(exceptions);
     }
     
+    public ApiResult(int statusCode, params Metadata[] metadata) : this(statusCode)
+    {
+        AddMetadata(metadata);
+    }
+    
+    public ApiResult(HttpStatusCode statusCode, params Metadata[] metadata) : this(statusCode)
+    {
+        AddMetadata(metadata);
+    }
+    
     /// <summary>
     /// Add exceptions to field Exceptions
     /// </summary>

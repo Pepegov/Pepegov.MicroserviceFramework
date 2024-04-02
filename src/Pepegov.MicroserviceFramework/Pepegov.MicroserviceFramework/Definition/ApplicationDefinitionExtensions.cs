@@ -116,7 +116,7 @@ public static class ApplicationDefinitionExtensions
                 logger.LogDebug("[AppDefinitions]: From {@items}", string.Join(", ", 
                     applicationDefinitionInformation.Items.Select(x => x.Assembly.FullName)));
 
-                foreach (var item in applicationDefinitionInformation.Items.OrderBy(x => x.ApplicationDefinition.GetType().Name))
+                foreach (var item in applicationDefinitionInformation.Items)
                 {
                     logger.LogDebug("[AppDefinitions]: {@AppDefinitionName} ({@AssemblyName}) (Enabled: {@Enabled})", item.ApplicationDefinition.GetType().Name, item.Assembly, item.ApplicationDefinition.Enabled ? "Yes" : "No");
                 }

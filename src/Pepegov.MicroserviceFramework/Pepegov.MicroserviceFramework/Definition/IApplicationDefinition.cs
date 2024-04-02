@@ -4,7 +4,7 @@ namespace Pepegov.MicroserviceFramework.Definition
 {
     public interface IApplicationDefinition
     {
-        public int Priority { get; }
+        int Priority { get; }
         bool Enabled { get; }
         
         bool Exported { get; }

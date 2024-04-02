@@ -4,28 +4,11 @@ namespace Pepegov.MicroserviceFramework.Definition;
 
 public abstract class ApplicationDefinition : IApplicationDefinition
 {
-    private int _priority;
-    
+
     /// <summary>
     /// Value in which the order in which the ApplicationDefinition will be executed is specified (0-10)
     /// </summary>
-    public int Priority
-    {
-        get => _priority;
-        set
-        {
-            if (value <= 0)
-            {
-                _priority = 0;
-            }
-            if (value >= 10)
-            {
-                _priority = 10;
-            }
-
-            _priority = value;
-        }   
-    }
+    public virtual int Priority => 0;
     
     /// <summary>
     /// Flag indicating whether the ApplicationDefinition is being used

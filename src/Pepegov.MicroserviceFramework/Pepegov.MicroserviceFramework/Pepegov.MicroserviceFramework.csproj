@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <Version>2.1.4</Version>
+        <Version>2.1.5</Version>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Title>Pepegov.MicroserviceFramework</Title>
@@ -27,6 +27,14 @@
         <Pack>True</Pack>
         <PackagePath></PackagePath>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Pepegov.MicroserviceFramework.ApiResults\Pepegov.MicroserviceFramework.ApiResults.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Pepegov.MicroserviceFramework.ApiResults\Pepegov.MicroserviceFramework.ApiResults.csproj" />
     </ItemGroup>
 
 </Project>

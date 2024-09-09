@@ -2,6 +2,10 @@ using System.Net;
 using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 
@@ -22,19 +26,27 @@ public sealed class HttpJsonResult<T> : BaseHttpResult<T>
         }
     }
 
-    private static readonly JsonSerializerOptions _jsonSerializerSettings = new()
+    private static readonly JsonSerializerOptions DefaultJsonSerializerSettings = new()
     {
         PropertyNamingPolicy  = JsonNamingPolicy.CamelCase,
     };
 
-    public override string? GetResponseMessage()
+    public override string? GetResponseMessage(HttpContext httpContext)
     {
         var message = GetMessage();
         if (message is null)
         {
             return null;
         }
-        return JsonSerializer.Serialize(message,  _jsonSerializerSettings);
+
+        JsonSerializerOptions options = DefaultJsonSerializerSettings;
+        var jsonOptions = httpContext.RequestServices.GetService<IOptions<JsonOptions>>();
+        if (jsonOptions is not null)
+        {
+            options = jsonOptions.Value.SerializerOptions;
+        }
+        
+        return JsonSerializer.Serialize(message,  options);
     }
 }
 

@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Mime;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Pepegov.MicroserviceFramework.ApiResults;
 
 namespace Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
@@ -21,7 +22,7 @@ public class HttpTextPlanResult<T> : BaseHttpResult<T>
             };
         }
     }
-    public override string? GetResponseMessage()
+    public override string? GetResponseMessage(HttpContext httpContext)
     {
         return GetMessage()?.ToString();
     }

@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Text;
 using System.Xml.Serialization;
+using Microsoft.AspNetCore.Http;
 using Pepegov.MicroserviceFramework.ApiResults;
 using Pepegov.MicroserviceFramework.AspNetCore.Infrastructure;
 
@@ -24,7 +25,7 @@ public sealed class HttpXmlResult<T> : BaseHttpResult<T>
         }
     }
 
-    public override string? GetResponseMessage()
+    public override string? GetResponseMessage(HttpContext httpContext)
     {
         var message = GetMessage();
         if (message is null)

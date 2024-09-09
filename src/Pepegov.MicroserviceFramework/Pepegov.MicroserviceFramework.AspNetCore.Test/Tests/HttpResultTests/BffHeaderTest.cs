@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Pepegov.MicroserviceFramework.ApiResults;
 using Pepegov.MicroserviceFramework.AspNetCore.WebApi;
@@ -18,6 +19,7 @@ public class BffHeaderTest
     {
         PropertyNamingPolicy  = JsonNamingPolicy.CamelCase,
     };
+    private readonly IServiceProvider DefaultServiceProvider = (new ServiceCollection()).BuildServiceProvider();
     
     [OneTimeSetUp]
     public void OneTimeSetup()
@@ -33,6 +35,7 @@ public class BffHeaderTest
         _context.Response.Body = new MemoryStream();
         _context.Request.ContentType = MediaTypeNames.Application.Json;
         _context.Request.Headers.Add("Bff", new StringValues("true"));
+        _context.RequestServices = DefaultServiceProvider;
     }
 
     [Test]

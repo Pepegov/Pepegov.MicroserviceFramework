@@ -33,7 +33,7 @@ public abstract class BaseHttpResult<T> : IHttpResult
             _bff = true;
         }
 
-        var message = GetResponseMessage();
+        var message = GetResponseMessage(httpContext);
         
         httpContext.Response.ContentType = ContextTypeValue.Type;
         httpContext.Response.StatusCode = (int)StatusCode;
@@ -112,5 +112,5 @@ public abstract class BaseHttpResult<T> : IHttpResult
         return entityType.GetProperties().FirstOrDefault(p => p.Name == "Message");
     }
 
-    public abstract string? GetResponseMessage();
+    public abstract string? GetResponseMessage(HttpContext httpContext);
 }

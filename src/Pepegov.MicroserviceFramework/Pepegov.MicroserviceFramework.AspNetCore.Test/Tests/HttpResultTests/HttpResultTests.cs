@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Pepegov.MicroserviceFramework.AspNetCore.WebApi.CustomHttpResult;
 
 namespace Pepegov.MicroserviceFramework.AspNetCore.Test.Tests.HttpResultTests;
@@ -13,6 +14,7 @@ public class HttpResultTests
     {
         PropertyNamingPolicy  = JsonNamingPolicy.CamelCase,
     };
+    private readonly IServiceProvider DefaultServiceProvider = (new ServiceCollection()).BuildServiceProvider();
     
     [OneTimeSetUp]
     public void OneTimeSetup()
@@ -44,7 +46,8 @@ public class HttpResultTests
         HttpContext context = new DefaultHttpContext();
         context.Response.Body = new MemoryStream();
         context.Request.ContentType = MediaTypeNames.Application.Json;
-
+        context.RequestServices = DefaultServiceProvider;
+        
         await httpResult.ExecuteAsync(context);
 
         var expectedResult = JsonSerializer.Serialize(_model, _jsonSerializerSettings);
@@ -62,6 +65,7 @@ public class HttpResultTests
         HttpContext context = new DefaultHttpContext();
         context.Response.Body = new MemoryStream();
         context.Request.ContentType = MediaTypeNames.Text.Plain;
+        context.RequestServices = DefaultServiceProvider;
 
         await httpResult.ExecuteAsync(context);
 

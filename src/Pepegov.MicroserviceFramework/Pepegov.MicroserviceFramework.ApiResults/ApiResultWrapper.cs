@@ -95,14 +95,15 @@ public class ApiResult<TMessage> : ApiResult
     public ApiResult(int statusCode, params Exception[] exceptions) : base(statusCode, exceptions) { }
     
     public ApiResult(HttpStatusCode statusCode, params Exception[] exceptions) : base(statusCode, exceptions) { }
-    
+
     /// <summary>
     /// Convert result to another entity type
     /// </summary>
     /// <param name="convertObj"></param>
     /// <typeparam name="TConvert"></typeparam>
     /// <returns></returns>
-    public ApiResult<TConvert> Convert<TConvert>(TConvert convertObj) where TConvert : class
+    public ApiResult<TConvert> Convert<TConvert>(TConvert convertObj)
+
     {
         var result = new ApiResult<TConvert>
         {

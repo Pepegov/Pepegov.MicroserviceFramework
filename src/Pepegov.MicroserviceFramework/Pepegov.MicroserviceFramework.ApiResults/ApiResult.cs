@@ -160,4 +160,26 @@ public class ApiResult
 
         return errorMessage.ToString();
     }
+    
+    /// <summary>
+    /// Convert result to result entity type
+    /// </summary>
+    /// <param name="convertObj"></param>
+    /// <typeparam name="TConvert"></typeparam>
+    /// <returns></returns>
+    public ApiResult<TConvert> Convert<TConvert>(TConvert? convertObj)
+    {
+        var result = new ApiResult<TConvert>
+        {
+            Metadata = this.Metadata,
+            Exceptions = this.Exceptions,
+            StatusCode = this.StatusCode
+        };
+        if (convertObj is not null)
+        {
+            result.Message = convertObj;   
+        }
+
+        return result;
+    }
 }

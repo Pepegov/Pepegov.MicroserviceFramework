@@ -103,7 +103,6 @@ public class ApiResult<TMessage> : ApiResult
     /// <typeparam name="TConvert"></typeparam>
     /// <returns></returns>
     public ApiResult<TConvert> Convert<TConvert>(TConvert convertObj)
-
     {
         var result = new ApiResult<TConvert>
         {
@@ -111,6 +110,24 @@ public class ApiResult<TMessage> : ApiResult
             Exceptions = this.Exceptions,
             StatusCode = this.StatusCode,
             Message = convertObj
+        };
+
+        return result;
+    }
+    
+    /// <summary>
+    /// Convert result to another null entity type
+    /// </summary>
+    /// <param name="convertObj"></param>
+    /// <typeparam name="TConvert"></typeparam>
+    /// <returns></returns>
+    public ApiResult<TConvert> Convert<TConvert>()
+    {
+        var result = new ApiResult<TConvert>
+        {
+            Metadata = this.Metadata,
+            Exceptions = this.Exceptions,
+            StatusCode = this.StatusCode,
         };
 
         return result;

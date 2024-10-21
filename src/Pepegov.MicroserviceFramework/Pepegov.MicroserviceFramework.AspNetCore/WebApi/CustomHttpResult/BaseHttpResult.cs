@@ -69,10 +69,12 @@ public abstract class BaseHttpResult<T> : IHttpResult
                 {
                     return bffMessage;
                 }
-                else
+                if (bffMessage is null && IsNullable(messageProperty))
                 {
-                    return GetGeneralApiException();
+                    return null;
                 }
+                
+                return GetGeneralApiException();
             }
             else
             {
@@ -110,6 +112,17 @@ public abstract class BaseHttpResult<T> : IHttpResult
         }
 
         return entityType.GetProperties().FirstOrDefault(p => p.Name == "Message");
+    }
+    
+    protected static bool IsNullable(PropertyInfo property)
+    {
+        // Проверка на Nullable<T>
+        if (!property.PropertyType.IsValueType)
+        {
+            return true; // Ссылочные типы являются nullable по умолчанию
+        }
+        
+        return Nullable.GetUnderlyingType(property.PropertyType) != null;
     }
 
     public abstract string? GetResponseMessage(HttpContext httpContext);

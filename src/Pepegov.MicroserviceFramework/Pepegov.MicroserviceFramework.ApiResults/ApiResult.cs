@@ -7,7 +7,7 @@ namespace Pepegov.MicroserviceFramework.ApiResults;
 /// <summary>
 /// Helps to give api full response with exceptions and metadata
 /// </summary>
-public class ApiResult
+public class ApiResult : ICloneable
 {
     /// <summary>
     /// Status code. Can be used for webapi or your own interpretation
@@ -164,10 +164,27 @@ public class ApiResult
     /// <summary>
     /// Convert result to result entity type
     /// </summary>
+    /// <typeparam name="TConvert"></typeparam>
+    /// <returns></returns>
+    public ApiResult<TConvert> Convert<TConvert>()
+    {
+        var result = new ApiResult<TConvert>
+        {
+            Metadata = this.Metadata,
+            Exceptions = this.Exceptions,
+            StatusCode = this.StatusCode
+        };
+
+        return result;
+    }
+    
+    /// <summary>
+    /// Convert result to result entity type
+    /// </summary>
     /// <param name="convertObj"></param>
     /// <typeparam name="TConvert"></typeparam>
     /// <returns></returns>
-    public ApiResult<TConvert> Convert<TConvert>(TConvert? convertObj)
+    public ApiResult<TConvert> Convert<TConvert>(TConvert convertObj)
     {
         var result = new ApiResult<TConvert>
         {
@@ -182,4 +199,6 @@ public class ApiResult
 
         return result;
     }
+
+    public object Clone() => MemberwiseClone();
 }

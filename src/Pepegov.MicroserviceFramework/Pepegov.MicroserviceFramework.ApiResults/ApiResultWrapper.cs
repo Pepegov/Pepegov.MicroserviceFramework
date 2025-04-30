@@ -102,7 +102,7 @@ public class ApiResult<TMessage> : ApiResult
     /// <param name="convertObj"></param>
     /// <typeparam name="TConvert"></typeparam>
     /// <returns></returns>
-    public ApiResult<TConvert> Convert<TConvert>(TConvert convertObj)
+    public new ApiResult<TConvert> Convert<TConvert>(TConvert convertObj)
     {
         var result = new ApiResult<TConvert>
         {
@@ -121,7 +121,7 @@ public class ApiResult<TMessage> : ApiResult
     /// <param name="convertObj"></param>
     /// <typeparam name="TConvert"></typeparam>
     /// <returns></returns>
-    public ApiResult<TConvert> Convert<TConvert>()
+    public new ApiResult<TConvert> Convert<TConvert>()
     {
         var result = new ApiResult<TConvert>
         {

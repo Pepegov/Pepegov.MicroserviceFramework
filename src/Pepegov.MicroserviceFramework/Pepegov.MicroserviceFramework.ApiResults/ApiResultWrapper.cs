@@ -95,6 +95,10 @@ public class ApiResult<TMessage> : ApiResult
     public ApiResult(int statusCode, params Exception[] exceptions) : base(statusCode, exceptions) { }
     
     public ApiResult(HttpStatusCode statusCode, params Exception[] exceptions) : base(statusCode, exceptions) { }
+    
+    public ApiResult(int statusCode, params Metadata[] metadata) : base(statusCode, metadata) { }
+    
+    public ApiResult(HttpStatusCode statusCode, params Metadata[] metadata) : base(statusCode, metadata) { }
 
     /// <summary>
     /// Convert result to another entity type

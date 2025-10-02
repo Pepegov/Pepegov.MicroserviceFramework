@@ -5,9 +5,23 @@ namespace Pepegov.MicroserviceFramework.ApiResults;
 /// </summary>
 public class ExceptionData
 {
+    public ExceptionData() {}
+
+    public ExceptionData(string message)
+    {
+        Message = message;
+    }
+
+    public ExceptionData(string message, TypeData typeData, string? source = null)
+    {
+        Message = message;
+        TypeData = typeData;
+        Source = source;
+    }
+
     public string Message { get; set; } = null!;
-    public string? Source { get; set; } = null!;
     public TypeData TypeData { get; set; } = null!;
+    public string? Source { get; set; }
 
     /// <summary>
     /// Get exception required data

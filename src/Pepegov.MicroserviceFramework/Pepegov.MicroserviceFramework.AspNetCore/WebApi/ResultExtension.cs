@@ -43,11 +43,12 @@ public static class ResultExtension
     
     public static IResult CustomAsJson(this IResultExtensions resultExtensions, ApiResult message)
         => new HttpJsonResult<ApiResult>(message, (HttpStatusCode)message.StatusCode, true);
-
     
-    public static IResult CustomAsJson<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message, HttpStatusCode statusCode)
+    public static IResult CustomAsJson<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message)
         => new HttpJsonResult<ApiResult<TMessage>>(message, (HttpStatusCode)message.StatusCode, true);
     
+    public static IResult CustomAsJson<TMessage>(this IResultExtensions resultExtensions, ApiResult<TMessage> message, HttpStatusCode statusCode)
+        => new HttpJsonResult<ApiResult<TMessage>>(message, statusCode, true);
     #endregion
 
     #region Xml

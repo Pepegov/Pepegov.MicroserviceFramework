@@ -113,6 +113,7 @@ public class ApiResult<TMessage> : ApiResult
             Metadata = this.Metadata,
             Exceptions = this.Exceptions,
             StatusCode = this.StatusCode,
+            MessageId = this.MessageId,
             Message = convertObj
         };
 
@@ -132,6 +133,7 @@ public class ApiResult<TMessage> : ApiResult
             Metadata = this.Metadata,
             Exceptions = this.Exceptions,
             StatusCode = this.StatusCode,
+            MessageId = this.MessageId,
         };
 
         return result;

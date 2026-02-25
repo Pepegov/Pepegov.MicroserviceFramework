@@ -10,6 +10,12 @@ namespace Pepegov.MicroserviceFramework.ApiResults;
 public class ApiResult : ICloneable
 {
     /// <summary>
+    /// MessageId for client idempotence
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? MessageId { get; set; }
+    
+    /// <summary>
     /// Status code. Can be used for webapi or your own interpretation
     /// </summary>
     public int StatusCode { get; set; }
@@ -190,7 +196,8 @@ public class ApiResult : ICloneable
         {
             Metadata = this.Metadata,
             Exceptions = this.Exceptions,
-            StatusCode = this.StatusCode
+            StatusCode = this.StatusCode,
+            MessageId = this.MessageId,
         };
         if (convertObj is not null)
         {
